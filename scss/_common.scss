@@ -1,0 +1,26 @@
+body {
+  background: #d1a686;
+  background: #e9eff0;
+}
+
+h1,
+h2,
+h3 {
+  font-family: "Roboto", sans-serif;
+  background: transparent;
+  color: bisque;
+}
+
+nav {
+  padding: 0 !important;
+  background: white;
+}
+
+p {
+  font-family: "Roboto", sans-serif;
+  color: #e9eff0;
+  font-size: 1.1em;
+  line-height: 1.2em;
+  backdrop-filter: blur(8px);
+  margin-top: 12px;
+}
