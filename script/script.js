@@ -4,6 +4,7 @@ function saludar(usuario) {
 
 function realizarPedido() {
   let nombre = prompt("Bienvenido/a a Milonga. Cual es tu nombre?");
+
   saludar(nombre);
 
   let cantidadEmpanadas = parseInt(
@@ -52,7 +53,7 @@ function realizarPedido() {
     }
   }
 
-  alert("SU PEDIDO HA SIDO ENVIADO. MUCHAS GRACIAS!");
+  alert(`TU PEDIDO HA SIDO ENVIADO. MUCHAS GRACIAS!`);
 }
 
 alert(
