@@ -41,10 +41,18 @@ function realizarPedido() {
 
   for (cantidadEmpanadas; cantidadEmpanadas > 0; cantidadEmpanadas--) {
     let gusto = prompt("Ingresa el sabor a agregar (Carne, Pollo, Fileteada):");
-    if (gusto == "Carne" || gusto == "Pollo" || gusto == "Fileteada") {
+    if (
+      gusto.toLowerCase() === "carne" ||
+      gusto.toLowerCase() === "pollo" ||
+      gusto.toLowerCase() === "fileteada"
+    ) {
       console.log(gusto);
     } else {
-      while (gusto != "Carne" && gusto != "Pollo" && gusto != "Fileteada") {
+      while (
+        gusto.toLowerCase() != "carne" &&
+        gusto.toLowerCase() != "pollo" &&
+        gusto.toLowerCase() != "fileteada"
+      ) {
         gusto = prompt(
           "Elegir un sabor disponible. Ingresa el sabor a agregar (Carne, Pollo, Fileteada):"
         );
