@@ -46,24 +46,24 @@ p {
 }
 
 .img-thumbnail {
-  background: url("/images/brick-wall.jpg");
+  background: url("../images/wood-bg.jpg");
   backdrop-filter: blur(15px);
   background-size: contain;
 }
 
-.btn-pink {
+.btn-bg__color {
   border: 4px solid #5cc8d6;
   background: #5cc8d6;
   color: white;
 }
-.btn-pink:hover {
+.btn-bg__color:hover {
   background-color: #e9eff0;
   color: rgb(0, 0, 0);
 }
-.btn-pink:visited {
+.btn-bg__color:visited {
   color: inherit;
 }
-.btn-pink:active {
+.btn-bg__color:active {
   color: inherit;
 }
 

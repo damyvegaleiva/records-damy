@@ -40,21 +40,21 @@ function realizarPedido() {
   console.log(`El costo de tu pedido es de $${precioTotal}.`);
 
   for (cantidadEmpanadas; cantidadEmpanadas > 0; cantidadEmpanadas--) {
-    let gusto = prompt("Ingresa el sabor a agregar (Carne, Pollo, Fileteada):");
+    let gusto = prompt("Ingresa el sabor a agregar (Carne, Pollo, Espinaca):");
     if (
       gusto.toLowerCase() === "carne" ||
       gusto.toLowerCase() === "pollo" ||
-      gusto.toLowerCase() === "fileteada"
+      gusto.toLowerCase() === "espinaca"
     ) {
       console.log(gusto);
     } else {
       while (
         gusto.toLowerCase() != "carne" &&
         gusto.toLowerCase() != "pollo" &&
-        gusto.toLowerCase() != "fileteada"
+        gusto.toLowerCase() != "espinaca"
       ) {
         gusto = prompt(
-          "Elegir un sabor disponible. Ingresa el sabor a agregar (Carne, Pollo, Fileteada):"
+          "Elegir un sabor disponible. Ingresa el sabor a agregar (Carne, Pollo, Espinaca):"
         );
       }
       console.log(gusto);
@@ -64,10 +64,30 @@ function realizarPedido() {
   alert(`TU PEDIDO HA SIDO ENVIADO. MUCHAS GRACIAS!`);
 }
 
+function crearSaboresEmpanadas() {
+  empanadas.forEach((empanada) => {
+    saboresEl.innerHTML += `
+    <article class="col-sm-12 col-md-6 col-lg-3">
+          <img src="${empanada.imgSrc}" alt="" class="w-100 img-thumbnail">
+          <h2 class="empanadas-sabores">${empanada.nombre}</h2>
+          <p>${empanada.ingredientes}</p>
+          <div class="options">
+            <h5>$${empanada.precio}</h5>
+            <button class="btn btn-bg__color mb-2 w-100" >Agregar</button>
+          </div>
+        </article>
+    `;
+  });
+}
+
 alert(
   'Abrir "console" antes de empezar tu pedido. Para realizar tu pedido hace click en "HACER PEDIDO".'
 );
 
 let startPedido = document.getElementById("startPedido");
+startPedido.onclick = realizarPedido;
 
-startPedido.addEventListener("click", realizarPedido, true);
+const saboresEl = document.querySelector(".row-sabores");
+crearSaboresEmpanadas();
+
+let cart = [];
