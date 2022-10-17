@@ -1,35 +1,53 @@
-const empanadas = [
-  {
-    id: "01",
-    nombre: "Carne",
-    precio: 3.99,
-    ingredientes: "Ingredientes: Carne, huevo, morrones, aceitunas, cebolla.",
-    stock: 50,
-    imgSrc: "./images/sabores/empanadas-carne.png",
-  },
-  {
-    id: "02",
-    nombre: "Pollo",
-    precio: 3.99,
-    ingredientes: "Pollo, huevo, cilantro, choclo.",
-    stock: 50,
-    imgSrc: "./images/sabores/empanadas-chicken.png",
-  },
-  {
-    id: "03",
-    nombre: "Espinaca",
-    ingredientes: "Espinaca, queso muzzarella.",
-    precio: 3.99,
-    stock: 50,
-    imgSrc: "./images/sabores/empanadas-espinaca.png",
-  },
-  {
-    id: "04",
-    nombre: "Mix de empanadas",
-    precio: 10.99,
-    ingredientes:
-      "Un variado a nuestra elecccion de los sabores pollo, carne, verdura, queso.",
-    stock: 50,
-    imgSrc: "./images/sabores/empanadas-mix.webp",
-  },
-];
+class Empanada {
+  constructor(id, name, price, ingredients, stock, image, typeOfProduct) {
+    this.id = id;
+    this.name = name;
+    this.price = price;
+    this.ingredients = ingredients;
+    this.stock = stock;
+    this.image = image;
+    this.typeOfProduct = typeOfProduct;
+  }
+}
+
+const empanada01 = new Empanada(
+  1,
+  "Carne",
+  4.99,
+  "Ingredientes: Carne, huevo, morrones, aceitunas, cebolla.",
+  20,
+  "./images/sabores/empanadas-carne.png",
+  "meat, todas"
+);
+
+const empanada02 = new Empanada(
+  2,
+  "Pollo",
+  3.99,
+  "Ingredientes: Pollo, huevo, cilantro, choclo.",
+  20,
+  "./images/sabores/empanadas-chicken.png",
+  "meat, todas"
+);
+
+const empanada03 = new Empanada(
+  3,
+  "Espinaca",
+  2.99,
+  "Ingredientes: Espinaca, queso muzzarella.",
+  20,
+  "./images/sabores/empanadas-espinaca.png",
+  "vegetarian, todas"
+);
+
+const empanada04 = new Empanada(
+  4,
+  "Choclo",
+  2.50,
+  "Ingredientes: Choclo y queso mozarella.",
+  20,
+  "./images/sabores/empanadas-mix.webp",
+  "vegetarian, todas"
+);
+
+const misEmpanadas = [empanada01, empanada02, empanada03, empanada04];
