@@ -64,14 +64,9 @@
 #botonera ul li a {
   font-family: "Roboto", sans-serif;
 }
-@media (min-width: 768px) {
-  #botonera img {
-    width: 200px;
-  }
-}
 
 .search-bar {
-  width: 25%;
+  width: 50%;
 }
 
 .hero-banner {
@@ -95,7 +90,7 @@
     width: 100%;
     background: transparent;
     backdrop-filter: blur(10px);
-    font-size: 4.5rem;
+    font-size: 2.5rem;
     padding: 15px 50px;
     text-align: center;
     z-index: 2;
