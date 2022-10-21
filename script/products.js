@@ -1,53 +1,102 @@
-class Empanada {
-  constructor(id, name, price, ingredients, stock, image, typeOfProduct) {
+class Record {
+  constructor(id, artist, album, price, genre, stock, image, typeOfProduct) {
     this.id = id;
-    this.name = name;
+    this.artist = artist;
+    this.album = album;
     this.price = price;
-    this.ingredients = ingredients;
+    this.genre = genre;
     this.stock = stock;
     this.image = image;
     this.typeOfProduct = typeOfProduct;
   }
 }
 
-const empanada01 = new Empanada(
+const myVinyls = [];
+
+myVinyls.push(new Record(
   1,
-  "Carne",
-  4.99,
-  "Ingredientes: Carne, huevo, morrones, aceitunas, cebolla.",
+  "The Ramones",
+  "Road To Ruin (Vinyl)",
+  24.99,
+  "Punk",
   20,
-  "./images/sabores/empanadas-carne.png",
-  "meat, todas"
-);
+  "./images/productos/ramones-roadtoruin.avif",
+  "Vinyl"
+));
 
-const empanada02 = new Empanada(
+myVinyls.push(new Record(
   2,
-  "Pollo",
-  3.99,
-  "Ingredientes: Pollo, huevo, cilantro, choclo.",
+  "The Clash",
+  "Combat Rock (Vinyl)",
+  28.99,
+  "Punk, Rock",
   20,
-  "./images/sabores/empanadas-chicken.png",
-  "meat, todas"
-);
+  "./images/productos/theclash-combatrock.avif",
+  "Vinyl"
+));
 
-const empanada03 = new Empanada(
+myVinyls.push(new Record(
   3,
-  "Espinaca",
-  2.99,
-  "Ingredientes: Espinaca, queso muzzarella.",
-  20,
-  "./images/sabores/empanadas-espinaca.png",
-  "vegetarian, todas"
-);
+  "The Specials",
+  "The Specials (Vinyl)",
+  19.99,
+  "Ska",
+  15,
+  "./images/productos/thespecials-.avif",
+  "Vinyl"
+));
 
-const empanada04 = new Empanada(
+myVinyls.push(new Record(
   4,
-  "Choclo",
-  2.50,
-  "Ingredientes: Choclo y queso mozarella.",
-  20,
-  "./images/sabores/empanadas-mix.webp",
-  "vegetarian, todas"
-);
+  "The Strokes",
+  "New Abnormal (Vinyl)",
+  30.99,
+  "Indie Rock",
+  10,
+  "./images/productos/thestrokes-thenewabnormal.avif",
+  "Vinyl"
+));
 
-const misEmpanadas = [empanada01, empanada02, empanada03, empanada04];
+myVinyls.push(new Record(
+  5,
+  "Brian Fallon",
+  "Sleepwalkers (Double Vinyl)",
+  34.99,
+  "Acoustic",
+  10,
+  "./images/productos/brian-fallon-sleepwalkers.avif",
+  "Vinyl"
+));
+
+myVinyls.push(new Record(
+  6,
+  "The Velvet Underground",
+  "Velvet Underground & Nico (Vinyl)",
+  33.99,
+  "Pop",
+  10,
+  "./images/productos/velvetunderground-nicoavif.avif",
+  "Vinyl"
+));
+
+myVinyls.push(new Record(
+  7,
+  "The Gaslight Anthem",
+  "Handwritten (Vinyl)",
+  27.99,
+  "Alternative Rock",
+  10,
+  "./images/productos/the-gaslight-anthem-handwritten.avif",
+  "Vinyl"
+));
+
+myVinyls.push(new Record(
+  8,
+  "Rocky Votolato",
+  "Television Of Saints (Vinyl)",
+  23.99,
+  "Acoustic",
+  10,
+  "./images/productos/rocky-votolato-television-of-saints.avif",
+  "Vinyl"
+));
