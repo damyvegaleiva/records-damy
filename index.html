@@ -17,7 +17,7 @@
 
   <header>
     <!---------------------- START NAV ---------------------->
-    <nav class="navbar navbar-expand-md navbar-light sticky-top" id="botonera">
+    <nav class="navbar navbar-expand-md navbar-light" id="botonera">
       <div class="container-fluid">
         <a class="navbar-brand" href="index.html">
           <img src="./images/logo-records.webp" alt="Logo MILONGA.">
@@ -43,6 +43,25 @@
             <li class="nav-item">
               <a class="nav-link" href="#">Promociones</a>
             </li>
+            <li>
+              <div id="modal-container" class="modal-container dont-show">
+                <h4>Tu carrito:</h4>
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th>ID:</th>
+                      <th>Item:</th>
+                      <th>Qty:</th>
+                      <th>Price:</th>
+                    </tr>
+                  </thead>
+                  <tbody id="table-body">
+                    <!-- aqui tabla carrito -->
+                  </tbody>
+                </table>
+                <h4 id="total">Total a pagar $:</h4>
+              </div>
+            </li>
           </ul>
         </div>
       </div>
@@ -60,26 +79,9 @@
       <form action="">
         <input class="mb-3 mx-auto search-bar" id="searchBar" type="text" placeholder="Search..">
       </form>
-      <div class="row row-vinyls">
+      <div class="row render-vinyls">
         <!-- RECORDS GO HERE -->
       </div>
-    </div>
-
-    <div id="modal-container" class="modal-container">
-      <h4>Tu carrito:</h4>
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th>Item:</th>
-            <th>Qty:</th>
-            <th>Price:</th>
-          </tr>
-        </thead>
-        <tbody id="table-body">
-          <!-- aqui tabla carrito -->
-        </tbody>
-      </table>
-      <h4 id="total">Total a pagar $:</h4>
     </div>
   </main>
 

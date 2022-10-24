@@ -101,3 +101,19 @@
     text-shadow: 2px 2px 5px #eae3e3;
   }
 }
+
+.modal-container {
+  position: absolute;
+  width: 25%;
+  top: 130px;
+  right: 5px;
+  z-index: 1500;
+  background: #e9eff0;
+  padding: 50px 15px;
+  border: 10px solid #c39532;
+  border-radius: 0 0 5px 15px;
+}
+
+.dont-show {
+  display: none;
+}
