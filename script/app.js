@@ -1,11 +1,12 @@
-// VARIABLES / CONSTANTES
+// VARIABLES / CONSTANTES.
 const buttonCart = document.querySelector("#buttonCart");
 const myVinylsContainer = document.querySelector(".render-vinyls");
 const tableBody = document.querySelector("#table-body");
 const cartContainer = document.querySelector("#modal-container");
 const searchBar = document.querySelector("#searchBar");
 
-// CART ARRAY
+
+// CART ARRAY.
 const cart = [];
 
 // CREA ELEMENTOS POR CARA ITEM DEL ARRAY.
@@ -23,7 +24,7 @@ function vinylsEl() {
         </article>
     `;
     });
-
+    //CAPTURA CADA BOTON UNICO PARA CADA PRODUCTO.
     myVinyls.forEach((vinyl) => {
         document
             .getElementById(`addButton-${vinyl.id}`)
@@ -35,20 +36,23 @@ function vinylsEl() {
 
 // PUSH ITEMS AL CARRITO
 function addToCart(cartItem) {
-
+    //AGREGA UNIDAD DE PRODUCTO SI ITEM YA EXISTE EN CARRITO
     if (cart.find((item) => item.id == cartItem.id)) {
-        alert("Item already exists.");
-        cart.map((item) => {
-            let numberOfUnits = item.numberOfUnits;
-            numberOfUnits++;
-            item.numberOfUnits = numberOfUnits
-        })
-
+        cart.find((item) => {
+            if (cartItem.id == item.id && item.numberOfUnits) {
+                item.numberOfUnits++;
+                item.price += cartItem.price
+                document.getElementById(`cantidad-product-${cartItem.id}`).innerText = `${item.numberOfUnits}`
+                document.getElementById(`total-prod-${cartItem.id}`).innerText = `${item.price.toFixed(2)}`
+            }
+        });
+        //AGREGAR ITEM POR PRIMERA AL CARRITO
     } else {
         cart.push({
             ...cartItem,
             numberOfUnits: 1,
         });
+
         alert(`"${cartItem.artist
             } - ${cartItem.album}" was added to your cart.`);
 
@@ -56,22 +60,22 @@ function addToCart(cartItem) {
         <tr>
             <th>${cartItem.id}</th>    
             <th>${cartItem.artist} - ${cartItem.album}</th>
-            <th>1</th>
-            <th>$${cartItem.price}</th>
+            <th id="cantidad-product-${cartItem.id}">1</th>
+            <th id="total-prod-${cartItem.id}">$${cartItem.price}</th>
         </tr>
     `;
-
-        let cartTotal = cart.reduce(
-            (acumulador, prod) => acumulador + prod.price,
-            0
-        );
-        document.getElementById("total").innerText =
-            "Total a pagar $: " + cartTotal.toFixed(2);
-        document.getElementById("itemCounterCart").innerText = cart.length;
     }
-    console.table(cart);
+
+    //SUMA TOTAL A PAGAR DE ITEMS EN EL CARRITO 
+    let cartTotal = cart.reduce((acumulador, prod) => acumulador + prod.price, 0);
+
+    document.getElementById("total").innerText =
+        "Total a pagar $: " + cartTotal.toFixed(2);
+    document.getElementById("itemCounterCart").innerText = cart.length;
+    // console.table(cart);
 }
 
+//MUESTRA O ESCONDE EL DIV DEL CARRITO
 function showHideCart() {
     if (cartContainer.classList.contains("dont-show")) {
         cartContainer.classList.remove("dont-show")
@@ -86,7 +90,7 @@ function searchFilterItem() {
     let filterSeach = myVinyls.filter((vinyl) =>
         vinyl.artist.toUpperCase().includes(searchBarText)
     );
-
+    //MUESTRA RESULTADO DE BUSQUEDA.
     filterSeach.forEach((myVinyls) => {
         myVinylsContainer.innerHTML = `
             <article class="col-sm-12 col-md-6 col-lg-3">

@@ -20,7 +20,7 @@ myVinyls.push(
     "Road To Ruin (Vinyl)",
     24.99,
     "Punk",
-    20,
+    5,
     "./images/productos/ramones-roadtoruin.avif",
     "Vinyl"
   )
@@ -33,7 +33,7 @@ myVinyls.push(
     "Combat Rock (Vinyl)",
     28.99,
     "Punk, Rock",
-    20,
+    10,
     "./images/productos/theclash-combatrock.avif",
     "Vinyl"
   )
@@ -59,7 +59,7 @@ myVinyls.push(
     "New Abnormal (Vinyl)",
     30.99,
     "Indie Rock",
-    10,
+    7,
     "./images/productos/thestrokes-thenewabnormal.avif",
     "Vinyl"
   )
@@ -72,7 +72,7 @@ myVinyls.push(
     "Sleepwalkers (Double Vinyl)",
     34.99,
     "Acoustic",
-    10,
+    12,
     "./images/productos/brian-fallon-sleepwalkers.avif",
     "Vinyl"
   )
@@ -85,7 +85,7 @@ myVinyls.push(
     "Velvet Underground & Nico (Vinyl)",
     33.99,
     "Pop",
-    10,
+    4,
     "./images/productos/velvetunderground-nicoavif.avif",
     "Vinyl"
   )
@@ -98,7 +98,7 @@ myVinyls.push(
     "Handwritten (Vinyl)",
     27.99,
     "Alternative Rock",
-    10,
+    2,
     "./images/productos/the-gaslight-anthem-handwritten.avif",
     "Vinyl"
   )
@@ -111,7 +111,7 @@ myVinyls.push(
     "Television Of Saints (Vinyl)",
     23.99,
     "Acoustic",
-    10,
+    13,
     "./images/productos/rocky-votolato-television-of-saints.avif",
     "Vinyl"
   )
