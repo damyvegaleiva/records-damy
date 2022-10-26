@@ -84,15 +84,21 @@ function showHideCart() {
     }
 }
 
+function clearContainer() {
+    myVinylsContainer.innerHTML = "";
+}
+
 // FILTRADO DE BUSQUEDA POR ARTISTA
 function searchFilterItem() {
     let searchBarText = searchBar.value.toUpperCase();
     let filterSeach = myVinyls.filter((vinyl) =>
         vinyl.artist.toUpperCase().includes(searchBarText)
     );
+    //LIMPIA CONTENEDOR DE VINILOS 
+    clearContainer();
     //MUESTRA RESULTADO DE BUSQUEDA.
     filterSeach.forEach((myVinyls) => {
-        myVinylsContainer.innerHTML = `
+        myVinylsContainer.innerHTML += `
             <article class="col-sm-12 col-md-6 col-lg-3">
                 <img src="${myVinyls.image}" alt="" class="w-100 img-thumbnail">
                 <h2 class="empanadas-sabores">${myVinyls.album}</h2>
@@ -104,6 +110,7 @@ function searchFilterItem() {
             </article>
         `;
     });
+    console.log(filterSeach);
 }
 
 function capturarEnter(e) {
