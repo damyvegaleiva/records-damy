@@ -107,7 +107,8 @@ function addToCart(cartItem) {
 
 function removeItemCart(vinyl) {
     cart.splice(cart.indexOf(vinyl), 1)
-    document.getElementById(`row-item-${vinyl.id}`).innerHTML = "";
+    const removeElement = document.getElementById(`row-item-${vinyl.id}`)
+    removeElement.remove();
     updateCart();
 }
 
