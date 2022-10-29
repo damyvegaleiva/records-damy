@@ -8,6 +8,7 @@
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <link rel="stylesheet" href="./css/style.css">
   <title>RECORDS | DAMY </title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 </head>
 
 <body>
@@ -53,6 +54,7 @@
                       <th>Item:</th>
                       <th>Qty:</th>
                       <th>Price:</th>
+                      <th></th>
                     </tr>
                   </thead>
                   <tbody id="table-body">
@@ -76,8 +78,8 @@
   <main id="vinyl">
     <h1 class="text-center ns-sabores">SHOP</h1>
     <div class="container-fluid w-75 py-3 mx-auto contenedor__sabores">
-      <form action="">
-        <input class="mb-3 mx-auto search-bar" id="searchBar" type="text" placeholder="Search..">
+      <form>
+        <input class="mb-3 mx-auto search-bar" id="searchInput" type="text" placeholder="Search...">
       </form>
       <div class="row render-vinyls">
         <!-- RECORDS GO HERE -->
@@ -91,6 +93,7 @@
     integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
     crossorigin="anonymous"></script>
   <script src="https://kit.fontawesome.com/394293560f.js" crossorigin="anonymous"></script>
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="./script/products.js"></script>
   <script src="./script/app.js"></script>
 </body>
