@@ -33,13 +33,33 @@ renderItemCart();
 // EN LA SEGUNDA VUELTA ENTRA POR EL IF Y AL ENCONTRAR UN ITEM CON EL MISMO ID SOLAMENTE LE AGREGA UNA UNIDAD.
 function addToCart(id) {
     if (cart.some(vinyl => vinyl.id === id)) {
-        updateNumberOfUnits("plus", id);
-    }
-    else {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You already have this item in your cart.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, add it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                updateNumberOfUnits("plus", id);
+            }
+        })
+    } else {
         const item = myRecords.find(vinyl => vinyl.id === id)
         cart.push({
             ...item,
             numberOfUnits: 1,
+        });
+
+        Swal.fire({
+            title: `${item.artist} - ${item.album}`,
+            text: 'Was added to your cart.',
+            imageUrl: `${item.image}`,
+            imageWidth: 200,
+            imageHeight: 200,
+            imageAlt: `${item.artist} - ${item.album}`,
         })
     }
     renderItemCart();
