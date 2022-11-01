@@ -27,6 +27,10 @@ p {
   margin-top: 12px;
 }
 
+i {
+  cursor: pointer;
+}
+
 .contenedor__sabores {
   border-radius: 5px;
   text-decoration-color: #5cc8d6;
@@ -143,11 +147,6 @@ p {
 
 .dont-show {
   display: none;
-}
-
-.trash-icon:hover {
-  cursor: pointer;
-  background: url("../images/trash-can-solid.svg");
 }
 
 /*# sourceMappingURL=style.css.map */

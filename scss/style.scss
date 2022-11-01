@@ -117,10 +117,3 @@
 .dont-show {
   display: none;
 }
-
-.trash-icon {
-  &:hover {
-    cursor: pointer;
-    background: url("../images/trash-can-solid.svg");
-  }
-}
