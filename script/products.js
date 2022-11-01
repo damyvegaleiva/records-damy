@@ -11,9 +11,9 @@ class Record {
   }
 }
 
-const myVinyls = [];
+const myRecords = [];
 
-myVinyls.push(
+myRecords.push(
   new Record(
     1,
     "The Ramones",
@@ -26,7 +26,7 @@ myVinyls.push(
   )
 );
 
-myVinyls.push(
+myRecords.push(
   new Record(
     2,
     "The Clash",
@@ -39,7 +39,7 @@ myVinyls.push(
   )
 );
 
-myVinyls.push(
+myRecords.push(
   new Record(
     3,
     "The Specials",
@@ -52,7 +52,7 @@ myVinyls.push(
   )
 );
 
-myVinyls.push(
+myRecords.push(
   new Record(
     4,
     "The Strokes",
@@ -65,7 +65,7 @@ myVinyls.push(
   )
 );
 
-myVinyls.push(
+myRecords.push(
   new Record(
     5,
     "Brian Fallon",
@@ -78,7 +78,7 @@ myVinyls.push(
   )
 );
 
-myVinyls.push(
+myRecords.push(
   new Record(
     6,
     "The Velvet Underground",
@@ -91,7 +91,7 @@ myVinyls.push(
   )
 );
 
-myVinyls.push(
+myRecords.push(
   new Record(
     7,
     "The Gaslight Anthem",
@@ -104,7 +104,7 @@ myVinyls.push(
   )
 );
 
-myVinyls.push(
+myRecords.push(
   new Record(
     8,
     "Rocky Votolato",

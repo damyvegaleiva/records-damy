@@ -131,7 +131,7 @@ p {
 
 .modal-container {
   position: absolute;
-  width: 25%;
+  width: 100%;
   top: 130px;
   right: 5px;
   z-index: 1500;
@@ -143,6 +143,11 @@ p {
 
 .dont-show {
   display: none;
+}
+
+.trash-icon:hover {
+  cursor: pointer;
+  background: url("../images/trash-can-solid.svg");
 }
 
 /*# sourceMappingURL=style.css.map */

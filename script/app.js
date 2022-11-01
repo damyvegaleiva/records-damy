@@ -1,174 +1,101 @@
-// VARIABLES / CONSTANTES.
-const buttonCart = document.querySelector("#buttonCart");
-const myVinylsContainer = document.querySelector(".render-vinyls");
-const tableBody = document.querySelector("#table-body");
-const cartContainer = document.querySelector("#modal-container");
-const searchInput = document.querySelector("#searchInput");
+const vinylContainer = document.getElementById("render-vinyls");
+const modalContainer = document.getElementById("modal-container")
+const totalPrice = document.getElementById("total")
+const cartBody = document.getElementById("table-body")
+const buttonCart = document.getElementById("buttonCart")
+const cartCounter = document.getElementById("itemCounterCart")
 
-// CART ARRAY.
-const cart = [];
+// TRAER CARRITO DEL STORAGE O EMPEZARLO VACIO
+let cart = JSON.parse(localStorage.getItem("CART")) || [];
 
-// CREA ELEMENTOS POR CARA ITEM DEL ARRAY.
-function vinylsEl() {
-    myVinyls.forEach((vinyl) => {
-        myVinylsContainer.innerHTML += `
+//RENDERIZAR SI HAY ITEMS EN EL CARRITO
+renderItemCart();
+
+//FUNCION AUTOEJECUTABLE PARA CREAR VINILOS
+(function renderVinylEl() {
+    myRecords.forEach((vinyl) => {
+        vinylContainer.innerHTML += `
         <article class="col-sm-12 col-md-6 col-lg-3">
             <img src="${vinyl.image}" alt="" class="w-100 img-thumbnail">
             <h2 class="empanadas-sabores">${vinyl.album}</h2>
             <p>${vinyl.artist}</p>
             <div class="options">
                 <h5>$${vinyl.price}</h5>
-                <button id="addButton-${vinyl.id}" class="btn btn-bg__color mb-2 w-100">Agregar</button>
+                <button onclick="addToCart(${vinyl.id})" class="btn btn-bg__color mb-2 w-100">Agregar</button>
             </div>
         </article>
-    `;
+    `
     });
-    //CAPTURA CADA BOTON UNICO PARA CADA PRODUCTO.
-    myVinyls.forEach((vinyl) => {
-        document
-            .getElementById(`addButton-${vinyl.id}`)
-            .addEventListener("click", function () {
-                addToCart(vinyl);
-            });
-    });
-}
+})();
 
-// PUSH ITEMS AL CARRITO
-function addToCart(cartItem) {
-    //AGREGA UNIDAD DE PRODUCTO SI ITEM YA EXISTE EN CARRITO
-    if (cart.find((item) => item.id == cartItem.id)) {
-        Swal.fire({
-            title: 'Are you sure?',
-            text: "Item already exists in cart.",
-            icon: 'question',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, add it!'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                cart.find((item) => {
-                    if (cartItem.id == item.id && item.numberOfUnits) {
-                        item.numberOfUnits++;
-                        item.price += cartItem.price;
-                        document.getElementById(
-                            `cantidad-product-${cartItem.id}`
-                        ).innerText = `${item.numberOfUnits}`;
-                        document.getElementById(
-                            `total-prod-${cartItem.id}`
-                        ).innerText = `${item.price.toFixed(2)}`;
-                        updateCart();
-                    }
-                });
-            }
-        })
-        //AGREGAR ITEM POR PRIMERA AL CARRITO
-    } else {
+
+// CUANDO SE AGREGUE UN ITEM AL CARRITO POR PRIMERA VEZ SE EJECUTA EL ELSE PUSHEANDO AL CARRITO EL ITEM CON TODAS SUS PROPIEDADES Y AGREGANDOLE UNA PROPIEDAD DE UNIDAD.
+// EN LA SEGUNDA VUELTA ENTRA POR EL IF Y AL ENCONTRAR UN ITEM CON EL MISMO ID SOLAMENTE LE AGREGA UNA UNIDAD.
+function addToCart(id) {
+    if (cart.some(vinyl => vinyl.id === id)) {
+        updateNumberOfUnits("plus", id);
+    }
+    else {
+        const item = myRecords.find(vinyl => vinyl.id === id)
         cart.push({
-            ...cartItem,
+            ...item,
             numberOfUnits: 1,
-        });
-        //ALER ITEM AGREGADO AL CARRITO
-        Swal.fire({
-            title: `${cartItem.artist} - ${cartItem.album}`,
-            text: 'Was added to the cart.',
-            imageUrl: cartItem.image,
-            imageWidth: 200,
-            imageHeight: 200,
-            imageAlt: `${cartItem.artist} - ${cartItem.album}`,
-            backdrop: 'swal2-backdrop-show',
-            showClass: {
-                popup: 'animate__animated animate__fadeInDown'
-            },
-            hideClass: {
-                popup: 'animate__animated animate__fadeOutUp'
-            }
         })
-        tableBody.innerHTML += `
-        <tr id="row-item-${cartItem.id}">
-            <th>${cartItem.id}</th>    
-            <th>${cartItem.artist} - ${cartItem.album}</th>
-            <th id="cantidad-product-${cartItem.id}">1</th>
-            <th id="total-prod-${cartItem.id}">$${cartItem.price}</th>
-            <th id="remove-item-${cartItem.id}">X</th>
+    }
+    renderItemCart();
+}
+
+// RENDERIZADO DE LOS ITEMS DENTRO DEL CARRITO
+function renderItemCart() {
+    cartBody.innerHTML = "";
+    cart.forEach(vinyl => {
+        cartBody.innerHTML += `
+        <tr>
+            <th>${vinyl.id}</th>
+            <th>${vinyl.album} - ${vinyl.artist}</th>
+            <th><i class="fa-regular fa-square-minus" onclick="updateNumberOfUnits('minus', ${vinyl.id})"></i> ${vinyl.numberOfUnits} <i class="fa-regular fa-square-plus" onclick="updateNumberOfUnits('plus', ${vinyl.id})"></i></th>
+            <th>${vinyl.price}</th>
+            <th><i class="fa-regular fa-trash-can"></i></th>
         </tr>
-    `;
-        //ELIMINAR ITEM CARRITO EVENTO/CAPTURA
-        cart.forEach((vinyl) => {
-            document
-                .getElementById(`remove-item-${vinyl.id}`)
-                .addEventListener("click", () => {
-                    removeItemCart(vinyl);
-                });
-        });
-    }
-    updateCart();
-}
-
-function removeItemCart(vinyl) {
-    cart.splice(cart.indexOf(vinyl), 1)
-    const removeElement = document.getElementById(`row-item-${vinyl.id}`)
-    removeElement.remove();
-    updateCart();
-}
-
-//UPDATECART
-function updateCart() {
-    //SUMA TOTAL A PAGAR DE ITEMS EN EL CARRITO
-    let cartTotal = cart.reduce((acumulador, prod) => acumulador + prod.price, 0);
-    document.getElementById("total").innerText =
-        "Total a pagar $: " + cartTotal.toFixed(2);
-    document.getElementById("itemCounterCart").innerText = cart.reduce(
-        (acumulador, prod) => acumulador + prod.numberOfUnits,
-        0
-    );
-}
-
-//MUESTRA O ESCONDE EL DIV DEL CARRITO
-function showHideCart() {
-    if (cartContainer.classList.contains("dont-show")) {
-        cartContainer.classList.remove("dont-show");
-    } else {
-        cartContainer.classList.add("dont-show");
-    }
-}
-
-//LIMPIA CONTENEDOR VINYLS
-function clearContainer() {
-    myVinylsContainer.innerHTML = "";
-}
-
-// FILTRADO DE BUSQUEDA POR ARTISTA
-function searchFilterItem() {
-    let searchBarText = searchInput.value.toUpperCase();
-    let filterSeach = myVinyls.filter((vinyl) =>
-        vinyl.artist.toUpperCase().includes(searchBarText)
-    );
-    //LIMPIA CONTENEDOR DE VINILOS
-    clearContainer();
-    //MUESTRA RESULTADO DE BUSQUEDA.
-    filterSeach.forEach((myVinyls) => {
-        myVinylsContainer.innerHTML += `
-        <article class= "col-sm-12 col-md-6 col-lg-3">
-        <img src="${myVinyls.image}" alt="" class="w-100 img-thumbnail">
-            <h2 class="empanadas-sabores">${myVinyls.album}</h2>
-            <p>${myVinyls.artist}</p>
-                <div class="options">
-                    <h5>$${myVinyls.price}</h5>
-                    <button id="addButton-${myVinyls.id}" class="btn btn-bg__color mb-2 w-100">Agregar</button>
-                </div>
-        </article>
-        `;
+        `
     });
+    updateCart();
 }
 
-function capturarEnter(e) {
-    if (e.which == 13 || e.keycode == 13) {
-        searchFilterItem();
-        e.preventDefault();
+// AGREGA UNA UNIDAD DEL MISMO ITEM SIEMPRE Y CUANDO HAYA STOCK O QUITA 1 UNIODAD SIEMPRE QUE HAYA 1 UNIDAD O MAS.
+function updateNumberOfUnits(action, id) {
+    cart.map(vinyl => {
+        if (action === "plus" && vinyl.id === id && vinyl.numberOfUnits < vinyl.stock) {
+            vinyl.numberOfUnits++;
+        } else if (action === "minus" && vinyl.id === id && vinyl.numberOfUnits > 1) {
+            vinyl.numberOfUnits--;
+        }
+    });
+    renderItemCart();
+}
+
+// MUESTRA EL TOTAL A PAGAR Y GUARDA EL CARRITO EN EL LOCAL STORAGE.
+// MUESTRA EN EL CONTADOR EL TOTAL DEL UNIIDADES 
+function updateCart() {
+    totalPrice.innerText = "Total a pagar: $" + cart.reduce((acumulador, vinyl) => acumulador + ((vinyl.numberOfUnits * vinyl.price)), 0).toFixed(2);
+    saveToLocalStorage("CART", JSON.stringify(cart));
+
+    cartCounter.innerText = cart.reduce((acumulador, vinyl) => acumulador + vinyl.numberOfUnits, 0);
+}
+
+// FUNCION REUTILIZABLE PARA ALMACENAR ITEMS EN EL LOCALSTORAGE
+function saveToLocalStorage(key, value) {
+    localStorage.setItem(key, value)
+}
+
+// MUESTRA/OCULTA EL CARRITO
+function showCart() {
+    if (modalContainer.classList.contains("dont-show")) {
+        modalContainer.classList.add("animate__animated", "animate__bounceInRight");
+        modalContainer.classList.remove("dont-show", "animate__bounceOutRight");
+    } else {
+        modalContainer.classList.add("dont-show");
     }
 }
 
-vinylsEl();
-buttonCart.onclick = showHideCart;
-searchInput.addEventListener("keypress", capturarEnter);
+buttonCart.onclick = showCart;
