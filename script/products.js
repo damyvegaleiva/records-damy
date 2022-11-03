@@ -21,7 +21,7 @@ myRecords.push(
     24.99,
     "Punk",
     5,
-    "./images/productos/ramones-roadtoruin.avif",
+    "./images/productos/ramones-roadtoruin.jpg",
     "Vinyl"
   )
 );
@@ -34,7 +34,7 @@ myRecords.push(
     28.99,
     "Punk, Rock",
     10,
-    "./images/productos/theclash-combatrock.avif",
+    "./images/productos/theclash-combatrock.jpg",
     "Vinyl"
   )
 );
@@ -47,7 +47,7 @@ myRecords.push(
     19.99,
     "Ska",
     15,
-    "./images/productos/thespecials-.avif",
+    "./images/productos/thespecials-.jpg",
     "Vinyl"
   )
 );
@@ -60,7 +60,7 @@ myRecords.push(
     30.99,
     "Indie Rock",
     7,
-    "./images/productos/thestrokes-thenewabnormal.avif",
+    "./images/productos/thestrokes-thenewabnormal.jpg",
     "Vinyl"
   )
 );
@@ -73,7 +73,7 @@ myRecords.push(
     34.99,
     "Acoustic",
     12,
-    "./images/productos/brian-fallon-sleepwalkers.avif",
+    "./images/productos/brian-fallon-sleepwalkers.jpg",
     "Vinyl"
   )
 );
@@ -86,7 +86,7 @@ myRecords.push(
     33.99,
     "Pop",
     4,
-    "./images/productos/velvetunderground-nicoavif.avif",
+    "./images/productos/velvetunderground-nico.jpg",
     "Vinyl"
   )
 );
@@ -99,7 +99,7 @@ myRecords.push(
     27.99,
     "Alternative Rock",
     2,
-    "./images/productos/the-gaslight-anthem-handwritten.avif",
+    "./images/productos/the-gaslight-anthem-handwritten.jpg",
     "Vinyl"
   )
 );
@@ -112,7 +112,7 @@ myRecords.push(
     23.99,
     "Acoustic",
     13,
-    "./images/productos/rocky-votolato-television-of-saints.avif",
+    "./images/productos/rocky-votolato-television-of-saints.jpg",
     "Vinyl"
   )
 );

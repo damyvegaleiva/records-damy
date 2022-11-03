@@ -1,9 +1,28 @@
 const vinylContainer = document.getElementById("render-vinyls");
-const modalContainer = document.getElementById("modal-container")
-const totalPrice = document.getElementById("total")
-const cartBody = document.getElementById("table-body")
-const buttonCart = document.getElementById("buttonCart")
-const cartCounter = document.getElementById("itemCounterCart")
+const modalContainer = document.getElementById("modal-container");
+const totalPrice = document.getElementById("total");
+const cartBody = document.getElementById("table-body");
+const buttonCart = document.getElementById("buttonCart");
+const cartCounter = document.getElementById("itemCounterCart");
+const searchInput = document.getElementById("searchInput");
+
+//ARRAY TRAIDO DE BASE DE DATOS
+let arrayRecordsDataBase = [];
+
+function getArrayFromDataBase() {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve(myRecords)
+        }, 1000)
+    });
+};
+
+getArrayFromDataBase()
+    .then((arrayDataBase) => {
+        arrayRecordsDataBase = arrayDataBase;
+        renderVinylEl(arrayRecordsDataBase);
+    });
+
 
 // TRAER CARRITO DEL STORAGE O EMPEZARLO VACIO
 let cart = JSON.parse(localStorage.getItem("CART")) || [];
@@ -12,12 +31,12 @@ let cart = JSON.parse(localStorage.getItem("CART")) || [];
 renderItemCart();
 
 //FUNCION AUTOEJECUTABLE PARA CREAR VINILOS
-(function renderVinylEl() {
-    myRecords.forEach((vinyl) => {
+function renderVinylEl(arrayToRenderize) {
+    arrayToRenderize.forEach((vinyl) => {
         vinylContainer.innerHTML += `
         <article class="col-sm-12 col-md-6 col-lg-3">
             <img src="${vinyl.image}" alt="" class="w-100 img-thumbnail">
-            <h2 class="empanadas-sabores">${vinyl.album}</h2>
+            <h2 class="album-vinyl-heading">${vinyl.album}</h2>
             <p>${vinyl.artist}</p>
             <div class="options">
                 <h5>$${vinyl.price}</h5>
@@ -26,7 +45,7 @@ renderItemCart();
         </article>
     `
     });
-})();
+};
 
 // CUANDO SE AGREGUE UN ITEM AL CARRITO POR PRIMERA VEZ SE EJECUTA EL ELSE PUSHEANDO AL CARRITO EL ITEM CON TODAS SUS PROPIEDADES Y AGREGANDOLE UNA PROPIEDAD DE UNIDAD.
 // EN LA SEGUNDA VUELTA ENTRA POR EL IF Y AL ENCONTRAR UN ITEM CON EL MISMO ID SOLAMENTE LE AGREGA UNA UNIDAD.
@@ -45,9 +64,10 @@ function addToCart(id) {
             if (result.isConfirmed) {
                 updateNumberOfUnits("plus", id);
             }
-        })
+        });
     } else {
-        const item = myRecords.find(vinyl => vinyl.id === id)
+        const item = arrayRecordsDataBase.find(vinyl => vinyl.id === id)
+
         cart.push({
             ...item,
             numberOfUnits: 1,
@@ -60,7 +80,7 @@ function addToCart(id) {
             imageWidth: 200,
             imageHeight: 200,
             imageAlt: `${item.artist} - ${item.album}`,
-        })
+        });
     }
     renderItemCart();
 }
@@ -111,10 +131,16 @@ function saveToLocalStorage(key, value) {
 // MUESTRA/OCULTA EL CARRITO
 function showCart() {
     if (modalContainer.classList.contains("dont-show")) {
+        modalContainer.classList.remove("animate__bounceOutRight");
         modalContainer.classList.add("animate__animated", "animate__bounceInRight");
         modalContainer.classList.remove("dont-show");
+
     } else {
-        modalContainer.classList.add("dont-show");
+        modalContainer.classList.remove("animate__bounceInRight")
+        modalContainer.classList.add("animate__bounceOutRight")
+        setTimeout(() => {
+            modalContainer.classList.add("dont-show");
+        }, 500);
     }
 }
 
@@ -124,4 +150,19 @@ function removeItemCart(id) {
     renderItemCart();
 }
 
+// CLICK PARA EJECUTRAR LA FUNCION DE MOSTRAR O NO CARRITO.
 buttonCart.onclick = showCart;
+
+// BUSQUEDA EN VIVO DE VINILOS POR SU ARTISTA Y/O ALBUM
+searchInput.addEventListener("keyup", (e) => {
+
+    let texto = e.target.value.toLowerCase();
+    let arrayFiltrado = arrayRecordsDataBase.filter(vinyls => vinyls.artist.toLowerCase().includes(texto) || vinyls.album.toLowerCase().includes(texto));
+
+    vinylContainer.innerHTML = `<div class="lds-ring"><div></div><div></div><div></div><div></div></div>`;
+
+    setTimeout(() => {
+        vinylContainer.innerHTML = "";
+        renderVinylEl(arrayFiltrado);
+    }, 2000);
+});
