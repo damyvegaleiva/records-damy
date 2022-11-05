@@ -1,0 +1,82 @@
+[
+    {
+        "id": 1,
+        "artist": "The Ramones",
+        "album": "Road To Ruin (Vinyl)",
+        "price": 24.99,
+        "genre": "Punk",
+        "stock": 5,
+        "image": "./images/productos/ramones-roadtoruin.jpg",
+        "typeOfProduct": "Vinyl"
+    },
+    {
+        "id": 2,
+        "artist": "The Clash",
+        "album": "Combat Rock (Vinyl)",
+        "price": 28.99,
+        "genre": "Punk Rock",
+        "stock": 10,
+        "image": "./images/productos/theclash-combatrock.jpg",
+        "typeOfProduct": "Vinyl"
+    },
+    {
+        "id": 3,
+        "artist": "The Specials",
+        "album": "The Specials (Vinyl)",
+        "price": 19.99,
+        "genre": "Ska",
+        "stock": 15,
+        "image": "./images/productos/thespecials-.jpg",
+        "typeOfProduct": "Vinyl"
+    },
+    {
+        "id": 4,
+        "artist": "The Strokes",
+        "album": "New Abnormal (Vinyl",
+        "price": 30.99,
+        "genre": "Indie Rock",
+        "stock": 7,
+        "image": "./images/productos/thestrokes-thenewabnormal.jpg",
+        "typeOfProduct": "Vinyl"
+    },
+    {
+        "id": 5,
+        "artist": "Brian Fallon",
+        "album": "Sleepwalkers (Double Vinyl)",
+        "price": 34.99,
+        "genre": "Acoustic",
+        "stock": 12,
+        "image": "./images/productos/brian-fallon-sleepwalkers.jpg",
+        "typeOfProduct": "Vinyl"
+    },
+    {
+        "id": 6,
+        "artist": "The Velvet Underground",
+        "album": "Velvet Underground & Nico (Vinyl)",
+        "price": 33.99,
+        "genre": "Pop",
+        "stock": 4,
+        "image": "./images/productos/velvetunderground-nico.jpg",
+        "typeOfProduct": "Vinyl"
+    },
+    {
+        "id": 7,
+        "artist": "The Gaslight Anthem",
+        "album": "Handwritten (Vinyl)",
+        "price": 27.99,
+        "genre": "Alternative Rock",
+        "stock": 2,
+        "image": "./images/productos/the-gaslight-anthem-handwritten.jpg",
+        "typeOfProduct": "Vinyl"
+    },
+    {
+        "id": 8,
+        "artist": "Rocky Votolato",
+        "album": "Television Of Saints (Vinyl)",
+        "price": 23.99,
+        "genre": "Acoustic",
+        "stock": 13,
+        "image": "./images/productos/rocky-votolato-television-of-saints.jpg",
+        "typeOfProduct": "Vinyl"
+    }
+]

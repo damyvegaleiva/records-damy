@@ -6,22 +6,36 @@ const buttonCart = document.getElementById("buttonCart");
 const cartCounter = document.getElementById("itemCounterCart");
 const searchInput = document.getElementById("searchInput");
 
-//ARRAY TRAIDO DE BASE DE DATOS
+// ARRAY DE DATA VACIO.
 let arrayRecordsDataBase = [];
 
-function getArrayFromDataBase() {
-    return new Promise((resolve, reject) => {
-        setTimeout(() => {
-            resolve(myRecords)
-        }, 1000)
-    });
-};
-
-getArrayFromDataBase()
-    .then((arrayDataBase) => {
-        arrayRecordsDataBase = arrayDataBase;
+// TRAER DATA DE ARCHIVO LOCAL JSON (API FICTICIA).
+async function getDataFromJson() {
+    const response = await fetch("./products.json");
+    arrayRecordsDataBase = await response.json();
+    vinylContainer.innerHTML = `<div class="lds-ring"><div></div><div></div><div></div><div></div></div>`;
+    setTimeout(() => {
+        vinylContainer.innerHTML = "";
         renderVinylEl(arrayRecordsDataBase);
-    });
+    }, 2500);
+}
+getDataFromJson();
+
+// ARRAY TRAIDO DE BASE DE DATOS PROPIO (Habilitar products.js script en HTML / Opcion alternativa con arhicvo JS local).
+// function getArrayFromDataBase() {
+//     return new Promise((resolve, reject) => {
+//         vinylContainer.innerHTML = `<div class="lds-ring"><div></div><div></div><div></div><div></div></div>`;
+//         setTimeout(() => {
+//             resolve(myRecords)
+//         }, 2000)
+//     });
+// };
+// getArrayFromDataBase()
+//     .then((arrayDataBase) => {
+//         arrayRecordsDataBase = arrayDataBase;
+//         vinylContainer.innerHTML = "";
+//         renderVinylEl(arrayRecordsDataBase);
+//     });
 
 
 // TRAER CARRITO DEL STORAGE O EMPEZARLO VACIO
@@ -49,7 +63,6 @@ function renderVinylEl(arrayToRenderize) {
 
 // CUANDO SE AGREGUE UN ITEM AL CARRITO POR PRIMERA VEZ SE EJECUTA EL ELSE PUSHEANDO AL CARRITO EL ITEM CON TODAS SUS PROPIEDADES Y AGREGANDOLE UNA PROPIEDAD DE UNIDAD.
 // EN LA SEGUNDA VUELTA ENTRA POR EL IF Y AL ENCONTRAR UN ITEM CON EL MISMO ID SOLAMENTE LE AGREGA UNA UNIDAD.
-
 function addToCart(id) {
     if (cart.some(vinyl => vinyl.id === id)) {
         Swal.fire({
@@ -66,13 +79,11 @@ function addToCart(id) {
             }
         });
     } else {
-        const item = arrayRecordsDataBase.find(vinyl => vinyl.id === id)
-
+        const item = arrayRecordsDataBase.find(vinyl => vinyl.id === id);
         cart.push({
             ...item,
             numberOfUnits: 1,
         });
-
         Swal.fire({
             title: `${item.artist} - ${item.album}`,
             text: 'Was added to your cart.',
@@ -107,8 +118,11 @@ function updateNumberOfUnits(action, id) {
     cart.map(vinyl => {
         if (action === "plus" && vinyl.id === id && vinyl.numberOfUnits < vinyl.stock) {
             vinyl.numberOfUnits++;
-        } else if (action === "minus" && vinyl.id === id && vinyl.numberOfUnits > 1) {
+        } else if (action === "minus" && vinyl.id === id && vinyl.numberOfUnits > 0) {
             vinyl.numberOfUnits--;
+            if (vinyl.numberOfUnits === 0) {
+                removeItemCart(id);
+            };
         }
     });
     renderItemCart();
@@ -136,8 +150,8 @@ function showCart() {
         modalContainer.classList.remove("dont-show");
 
     } else {
-        modalContainer.classList.remove("animate__bounceInRight")
-        modalContainer.classList.add("animate__bounceOutRight")
+        modalContainer.classList.remove("animate__bounceInRight");
+        modalContainer.classList.add("animate__bounceOutRight");
         setTimeout(() => {
             modalContainer.classList.add("dont-show");
         }, 500);

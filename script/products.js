@@ -32,7 +32,7 @@ myRecords.push(
     "The Clash",
     "Combat Rock (Vinyl)",
     28.99,
-    "Punk, Rock",
+    "Punk Rock",
     10,
     "./images/productos/theclash-combatrock.jpg",
     "Vinyl"
