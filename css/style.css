@@ -132,7 +132,7 @@ i {
   border: 10px solid #c39532;
   border-radius: 0 0 5px 15px;
   top: 1;
-  left: 0;
+  left: 0px;
   position: absolute;
 }
 
@@ -188,10 +188,10 @@ i {
 }
 @media screen and (min-width: 768px) {
   .modal-container {
-    position: absolute;
-    min-width: 500px;
+    width: 500px;
+    left: auto;
     top: 130px;
-    right: 5px;
+    right: 0;
   }
 }
 

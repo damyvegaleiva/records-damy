@@ -27,24 +27,43 @@ getDataFromJson();
 
 //POSTEANDO LA COMPRA AL JSONPLACEHOLDER + LIMPIA EL CARRITO POST-COMPRA
 function newPurchase() {
-    const URLPOST = "https://jsonplaceholder.typicode.com/posts";
-    const newPurchase = cart;
-
-    fetch(URLPOST, {
-        method: "Post",
-        body: JSON.stringify(newPurchase),
-        headers: {
-            'Content-type': 'application/json; charset=UTF-8'
-        }
-    })
-        .then(response => response.json())
-        .then(dataBack => {
-            console.log(dataBack);
+    if (cart.length == 0) {
+        let timerInterval
+        Swal.fire({
+            title: 'Cart is empty!',
+            timer: 1500,
+            timerProgressBar: true,
+            willClose: () => {
+                clearInterval(timerInterval)
+            }
         });
-
-    cart.forEach(vinyl => {
-        removeItemCart(vinyl.id);
-    });
+    }
+    else {
+        const URLPOST = "https://jsonplaceholder.typicode.com/posts";
+        const newPurchase = cart;
+        fetch(URLPOST, {
+            method: "Post",
+            body: JSON.stringify(newPurchase),
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8'
+            }
+        })
+            .then(response => response.json())
+            .then(dataBack => {
+                console.log(dataBack);
+            });
+        cart.forEach(vinyl => {
+            removeItemCart(vinyl.id);
+        });
+        Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Thanks for your purchase! 🛒',
+            showConfirmButton: false,
+            timer: 2000,
+        });
+    }
+    showCart();
 }
 
 // ARRAY TRAIDO DE BASE DE DATOS PROPIO (Habilitar products.js script en HTML / Opcion alternativa con arhicvo JS local).
@@ -177,12 +196,12 @@ function saveToLocalStorage(key, value) {
 // MUESTRA/OCULTA EL CARRITO
 function showCart() {
     if (modalContainer.classList.contains("dont-show")) {
-        modalContainer.classList.remove("animate__bounceOutRight");
-        modalContainer.classList.add("animate__animated", "animate__bounceInRight");
+        modalContainer.classList.remove("animate__bounceOutUp");
+        modalContainer.classList.add("animate__animated", "animate__bounceInDown");
         modalContainer.classList.remove("dont-show");
     } else {
-        modalContainer.classList.remove("animate__bounceInRight");
-        modalContainer.classList.add("animate__bounceOutRight");
+        modalContainer.classList.remove("animate__bounceInDown");
+        modalContainer.classList.add("animate__bounceOutUp");
         setTimeout(() => {
             modalContainer.classList.add("dont-show");
         }, 500);
