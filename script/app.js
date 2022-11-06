@@ -1,3 +1,4 @@
+//VARIABLES PARA DOM
 const vinylContainer = document.getElementById("render-vinyls");
 const modalContainer = document.getElementById("modal-container");
 const totalPrice = document.getElementById("total");
@@ -5,6 +6,8 @@ const cartBody = document.getElementById("table-body");
 const buttonCart = document.getElementById("buttonCart");
 const cartCounter = document.getElementById("itemCounterCart");
 const searchInput = document.getElementById("searchInput");
+const purchaseButton = document.getElementById("purchaseButton");
+
 
 // ARRAY DE DATA VACIO.
 let arrayRecordsDataBase = [];
@@ -21,13 +24,36 @@ async function getDataFromJson() {
 }
 getDataFromJson();
 
+
+//POSTEANDO LA COMPRA AL JSONPLACEHOLDER + LIMPIA EL CARRITO POST-COMPRA
+function newPurchase() {
+    const URLPOST = "https://jsonplaceholder.typicode.com/posts";
+    const newPurchase = cart;
+
+    fetch(URLPOST, {
+        method: "Post",
+        body: JSON.stringify(newPurchase),
+        headers: {
+            'Content-type': 'application/json; charset=UTF-8'
+        }
+    })
+        .then(response => response.json())
+        .then(dataBack => {
+            console.log(dataBack);
+        });
+
+    cart.forEach(vinyl => {
+        removeItemCart(vinyl.id);
+    });
+}
+
 // ARRAY TRAIDO DE BASE DE DATOS PROPIO (Habilitar products.js script en HTML / Opcion alternativa con arhicvo JS local).
 // function getArrayFromDataBase() {
 //     return new Promise((resolve, reject) => {
 //         vinylContainer.innerHTML = `<div class="lds-ring"><div></div><div></div><div></div><div></div></div>`;
 //         setTimeout(() => {
 //             resolve(myRecords)
-//         }, 2000)
+//         }, 2000);
 //     });
 // };
 // getArrayFromDataBase()
@@ -36,7 +62,6 @@ getDataFromJson();
 //         vinylContainer.innerHTML = "";
 //         renderVinylEl(arrayRecordsDataBase);
 //     });
-
 
 // TRAER CARRITO DEL STORAGE O EMPEZARLO VACIO
 let cart = JSON.parse(localStorage.getItem("CART")) || [];
@@ -81,7 +106,11 @@ function addToCart(id) {
     } else {
         const item = arrayRecordsDataBase.find(vinyl => vinyl.id === id);
         cart.push({
-            ...item,
+            id: item.id,
+            artist: item.artist,
+            album: item.album,
+            price: item.price,
+            stock: item.stock,
             numberOfUnits: 1,
         });
         Swal.fire({
@@ -133,8 +162,11 @@ function updateNumberOfUnits(action, id) {
 function updateCart() {
     cartCounter.innerText = cart.reduce((acumulador, vinyl) => acumulador + vinyl.numberOfUnits, 0);
     totalPrice.innerText = "Total a pagar: $" + cart.reduce((acumulador, vinyl) => acumulador + ((vinyl.numberOfUnits * vinyl.price)), 0).toFixed(2);
-
     saveToLocalStorage("CART", JSON.stringify(cart));
+
+    if (cartCounter.innerText == 0) {
+        totalPrice.innerText = "Your cart is empty";
+    }
 }
 
 // FUNCION REUTILIZABLE PARA ALMACENAR ITEMS EN EL LOCALSTORAGE
@@ -148,7 +180,6 @@ function showCart() {
         modalContainer.classList.remove("animate__bounceOutRight");
         modalContainer.classList.add("animate__animated", "animate__bounceInRight");
         modalContainer.classList.remove("dont-show");
-
     } else {
         modalContainer.classList.remove("animate__bounceInRight");
         modalContainer.classList.add("animate__bounceOutRight");
@@ -166,10 +197,10 @@ function removeItemCart(id) {
 
 // CLICK PARA EJECUTRAR LA FUNCION DE MOSTRAR O NO CARRITO.
 buttonCart.onclick = showCart;
+purchaseButton.onclick = newPurchase;
 
 // BUSQUEDA EN VIVO DE VINILOS POR SU ARTISTA Y/O ALBUM
 searchInput.addEventListener("keyup", (e) => {
-
     let texto = e.target.value.toLowerCase();
     let arrayFiltrado = arrayRecordsDataBase.filter(vinyls => vinyls.artist.toLowerCase().includes(texto) || vinyls.album.toLowerCase().includes(texto));
 

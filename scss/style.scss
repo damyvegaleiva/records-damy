@@ -36,6 +36,7 @@
 #botonera img {
   width: 120px;
 }
+
 .ns-shop {
   font-family: "Quicksand", sans-serif;
   font-weight: 600;
@@ -94,22 +95,24 @@
 }
 
 .modal-container {
-  position: absolute;
-  width: 100%;
-  top: 130px;
-  right: 5px;
-  z-index: 1500;
   background: #e9eff0;
-  padding: 50px 15px;
+  padding: 25px;
   border: 10px solid #c39532;
   border-radius: 0 0 5px 15px;
+  top: 1;
+  left: 0;
+  position: absolute;
 }
 
+.qty-th {
+  min-width: 70px;
+  margin: auto;
+}
 .dont-show {
   display: none;
 }
-//////////////@at-root
 
+//ANIMACION CARGA DE PRODUCTOS Y LIVE SEARCH
 .lds-ring {
   display: inline-block;
   position: relative;
@@ -144,5 +147,14 @@
   }
   100% {
     transform: rotate(360deg);
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .modal-container {
+    position: absolute;
+    min-width: 500px;
+    top: 130px;
+    right: 5px;
   }
 }

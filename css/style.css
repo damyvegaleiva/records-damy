@@ -16,6 +16,7 @@ h3 {
 nav {
   padding: 0 !important;
   background: white;
+  position: absolute;
 }
 
 p {
@@ -29,6 +30,7 @@ p {
 
 i {
   cursor: pointer;
+  font-size: 1.2rem;
 }
 
 .contenedor__vinyls {
@@ -125,15 +127,18 @@ i {
 }
 
 .modal-container {
-  position: absolute;
-  width: 100%;
-  top: 130px;
-  right: 5px;
-  z-index: 1500;
   background: #e9eff0;
-  padding: 50px 15px;
+  padding: 25px;
   border: 10px solid #c39532;
   border-radius: 0 0 5px 15px;
+  top: 1;
+  left: 0;
+  position: absolute;
+}
+
+.qty-th {
+  min-width: 70px;
+  margin: auto;
 }
 
 .dont-show {
@@ -179,6 +184,14 @@ i {
   }
   100% {
     transform: rotate(360deg);
+  }
+}
+@media screen and (min-width: 768px) {
+  .modal-container {
+    position: absolute;
+    min-width: 500px;
+    top: 130px;
+    right: 5px;
   }
 }
 
