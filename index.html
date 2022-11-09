@@ -18,9 +18,7 @@
 
   <header>
     <!---------------------- START NAV ---------------------->
-
-
-    <nav class="navbar navbar-expand-md navbar-light fixed-top" id="botonera">
+    <nav class="navbar navbar-expand-md navbar-light fixed-top" id="navBar">
       <div class="container-fluid">
         <a class="navbar-brand" href="index.html">
           <img src="./images/logo-records.webp" alt="">
@@ -60,7 +58,7 @@
                     </tr>
                   </thead>
                   <tbody class="table-body" id="table-body">
-                    <!-- aqui tabla carrito -->
+                    <!-- CART TABLE -->
                   </tbody>
                 </table>
                 <h4 id="total" class="mb-0 mt-5">Total a pagar: $</h4>
@@ -80,13 +78,36 @@
   <!---------------------- MAIN ---------------------->
   <main id="vinyl">
     <h1 class="text-center ns-shop">SHOP</h1>
-    <div class="container-fluid w-75 py-3 mx-auto contenedor__vinyls">
+    <div class="container-fluid w-75 mx-auto contenedor__vinyls">
       <form>
         <input class="mb-3 mx-auto search-bar" id="searchInput" type="text" placeholder="Search...">
       </form>
       <div class="row render-vinyls" id="render-vinyls">
         <!-- RECORDS GO HERE -->
       </div>
+    </div>
+
+    <div class="form-container">
+      <h2>PAYMENT FORM</h2>
+      <form id="form" class="form-purchase" action="/">
+        <div class="input-control">
+          <label for="name">Your Name:</label>
+          <input id="name" name="name" type="text" maxlength="30" placeholder="Your Name" />
+          <small class="error"></small>
+        </div>
+        <div class="input-control">
+          <label for="credit-card">Payment: <i class="fa-solid fa-credit-card"></i> <i class="fa-brands fa-cc-visa"></i>
+            <i class="fa-brands fa-cc-mastercard"></i> <i class="fa-brands fa-cc-discover"></i></label>
+          <input id="credit-card" name="credit-card" type="text" placeholder="16-digit card number" maxlength="16" />
+          <small class="error"></small>
+        </div>
+        <div class="input-control">
+          <label for="email">Email:</label>
+          <input id="email" name="email" type="email" placeholder="email@example.com" />
+          <small class="error"></small>
+        </div>
+        <button class="btn btn__submit" type="submit">Submit</button>
+      </form>
     </div>
   </main>
 
@@ -97,7 +118,6 @@
     crossorigin="anonymous"></script>
   <script src="https://kit.fontawesome.com/394293560f.js" crossorigin="anonymous"></script>
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <!-- <script src="./script/products.js"></script> -->
   <script src="./script/app.js"></script>
 </body>
 

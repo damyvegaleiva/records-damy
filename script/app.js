@@ -8,12 +8,19 @@ const cartCounter = document.getElementById("itemCounterCart");
 const searchInput = document.getElementById("searchInput");
 const purchaseButton = document.getElementById("purchaseButton");
 
+//VARIABLES PARA USAR EN EL FORMULARIO
+const nameInput = document.getElementById("name");
+const creditCardInput = document.getElementById("credit-card");
+const emailInput = document.getElementById("email");
+const formSubmit = document.getElementById("form")
+const error = document.getElementById("error");
+
 
 // ARRAY DE DATA VACIO.
 let arrayRecordsDataBase = [];
 
-// TRAER DATA DE ARCHIVO LOCAL JSON (API FICTICIA).
-async function getDataFromJson() {
+// TRAER DATA DE ARCHIVO LOCAL JSON (API FICTICIA) / FUNCION AUTOEJECTUABLE.
+(async function getDataFromJson() {
     const response = await fetch("./products.json");
     arrayRecordsDataBase = await response.json();
     vinylContainer.innerHTML = `<div class="lds-ring"><div></div><div></div><div></div><div></div></div>`;
@@ -21,9 +28,7 @@ async function getDataFromJson() {
         vinylContainer.innerHTML = "";
         renderVinylEl(arrayRecordsDataBase);
     }, 2500);
-}
-getDataFromJson();
-
+})();
 
 //POSTEANDO LA COMPRA AL JSONPLACEHOLDER + LIMPIA EL CARRITO POST-COMPRA
 function newPurchase() {
@@ -32,6 +37,7 @@ function newPurchase() {
         Swal.fire({
             title: 'Cart is empty!',
             timer: 1500,
+            icon: 'error',
             timerProgressBar: true,
             willClose: () => {
                 clearInterval(timerInterval)
@@ -66,22 +72,6 @@ function newPurchase() {
     showCart();
 }
 
-// ARRAY TRAIDO DE BASE DE DATOS PROPIO (Habilitar products.js script en HTML / Opcion alternativa con arhicvo JS local).
-// function getArrayFromDataBase() {
-//     return new Promise((resolve, reject) => {
-//         vinylContainer.innerHTML = `<div class="lds-ring"><div></div><div></div><div></div><div></div></div>`;
-//         setTimeout(() => {
-//             resolve(myRecords)
-//         }, 2000);
-//     });
-// };
-// getArrayFromDataBase()
-//     .then((arrayDataBase) => {
-//         arrayRecordsDataBase = arrayDataBase;
-//         vinylContainer.innerHTML = "";
-//         renderVinylEl(arrayRecordsDataBase);
-//     });
-
 // TRAER CARRITO DEL STORAGE O EMPEZARLO VACIO
 let cart = JSON.parse(localStorage.getItem("CART")) || [];
 
@@ -98,7 +88,7 @@ function renderVinylEl(arrayToRenderize) {
             <p>${vinyl.artist}</p>
             <div class="options">
                 <h5>$${vinyl.price}</h5>
-                <button onclick="addToCart(${vinyl.id})" class="btn btn-bg__color mb-2 w-100">Agregar</button>
+                <button onclick="addToCart(${vinyl.id})" class="btn btn-bg__color mb-2 w-100">Add To Cart</button>
             </div>
         </article>
     `
@@ -161,7 +151,7 @@ function renderItemCart() {
     updateCart();
 }
 
-// AGREGA UNA UNIDAD DEL MISMO ITEM SIEMPRE Y CUANDO HAYA STOCK O QUITA 1 UNIODAD SIEMPRE QUE HAYA 1 UNIDAD O MAS.
+// AGREGA UNA UNIDAD DEL MISMO ITEM SIEMPRE Y CUANDO HAYA STOCK O QUITA 1 UNIDAD SIEMPRE QUE HAYA 1 UNIDAD O MAS.
 function updateNumberOfUnits(action, id) {
     cart.map(vinyl => {
         if (action === "plus" && vinyl.id === id && vinyl.numberOfUnits < vinyl.stock) {
@@ -185,7 +175,7 @@ function updateCart() {
 
     if (cartCounter.innerText == 0) {
         totalPrice.innerText = "Your cart is empty";
-    }
+    };
 }
 
 // FUNCION REUTILIZABLE PARA ALMACENAR ITEMS EN EL LOCALSTORAGE
@@ -230,3 +220,78 @@ searchInput.addEventListener("keyup", (e) => {
         renderVinylEl(arrayFiltrado);
     }, 2000);
 });
+
+// EJECUTRA LA FUNCION DE VALIDAR LOS INPUTS AL TIPEAR EN LAS CASILLAS.
+nameInput.onkeyup = validateInputs;
+creditCardInput.onkeyup = validateInputs;
+emailInput.onkeyup = validateInputs;
+
+
+//PREVIENE QUE SE BORREN LOS DATOS YA INGRESADOS EN CASO DE ERROR O QUE SE ENTREGUE UN FORMULARIO VACIO.
+formSubmit.addEventListener("submit", (e) => {
+    e.preventDefault();
+    validateInputs();
+})
+
+// VALIDA LOS INPUTS INGRESADOS
+function validateInputs() {
+
+    //CAPTURA EL VALOR INGRESADO EN LOS INPUTS Y CON EL METODO ' TRIM() ' REMUEVE ESPACIOS VACIOS ADELANTE Y AL FINAL.
+    const nameValue = nameInput.value.trim();
+    const creditCardValue = creditCardInput.value.trim();
+    const emailValue = emailInput.value.trim();
+
+    //VALIANDO NOMBRE POR CAMPO VACIO, POR SI CONTIENE ALGUN CARACTER ESPECIAL USANDO UNA EXPRESION REGULAR O SI LA CANTIDAD DE CARACTERES ES MAYOR a 25.
+    if (!nameValue || !(/^[a-zA-Z]+$/).test(nameInput.value)) {
+        valError(nameInput, "Valid name is required.");
+    }
+    else if (nameValue.length > 25) {
+        valError(nameInput, "Name is too long.");
+    }
+    else {
+        valSuccess(nameInput);
+    }
+
+    //VALIDANDO NUMERO DE TARJETA POR CAMPO VACIO, SI CANTIDAD DE CARACTERES ES MENOR A 16 O SI LO INGRESADO CONTIENE ALGUN CARACTER QUE NO SEA UN NUMERO.
+    if (!creditCardValue || creditCardValue.length < 16 || isNaN(creditCardInput.value)) {
+        valError(creditCardInput, "16-digit card number is required.");
+    } else {
+        valSuccess(creditCardInput);
+    }
+
+    //VALIDANDO EMAIL POR CAMPO VACIO O COMPROBANDO POR VERDADERO O FALSO SI ES UN EMAIL VALIDO.
+    if (!emailValue) {
+        valError(emailInput, "Valid email is required.");
+    } else if (!valEmail(emailValue)) {
+        valError(emailInput, "Email is not a valid email.")
+    }
+    else {
+        valSuccess(emailInput)
+    }
+}
+
+//PARA CHEQUEAR SI EL EMAIL ES UN EMAIL VALIDO EJECUTANDO EL METODO TEST Y DEVOLVIENDO UN BOOLEANO EL CUAL SE ANALIZA EN EL ' ELSE IF '  DE VALIDANDO EMAIL (LA LINEA DE CODIGO DE LA EXPRESION REGULAR SI LA SACA DE INTERNET).
+function valEmail(email) {
+    return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email);
+}
+
+//RECIBE COMO PARAMETRO EL ELEMENTO AL QUE VA A CAPTURAR Y EL MENSAJE DE ERROR QUE VA A MOSTRAR EN PANTALLA
+//CAMBIA COLOR DE BORDER DEL INPUT
+function valError(element, message) {
+    const inputControl = element.parentElement;
+    const errorDisplay = inputControl.querySelector(".error")
+
+    errorDisplay.innerText = message;
+    inputControl.classList.add("error")
+    inputControl.classList.remove("success")
+}
+
+//RECIBE COMO PARAMETRO EL ELEMENTO AL QUE VA A CAPTURAR PARA PONER EL BORDER EN VERDE
+function valSuccess(element) {
+    const inputControl = element.parentElement;
+    const errorDisplay = inputControl.querySelector(".error");
+
+    errorDisplay.innerText = "";
+    inputControl.classList.add("success");
+    inputControl.classList.remove("error");
+}
