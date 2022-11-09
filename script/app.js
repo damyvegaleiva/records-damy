@@ -253,7 +253,7 @@ function validateInputs() {
     }
 
     //VALIDANDO NUMERO DE TARJETA POR CAMPO VACIO, SI CANTIDAD DE CARACTERES ES MENOR A 16 O SI LO INGRESADO CONTIENE ALGUN CARACTER QUE NO SEA UN NUMERO.
-    if (!creditCardValue || creditCardValue.length < 16 || isNaN(creditCardInput.value)) {
+    if (!creditCardValue || creditCardValue.length != 16 || isNaN(creditCardInput.value)) {
         valError(creditCardInput, "16-digit card number is required.");
     } else {
         valSuccess(creditCardInput);
