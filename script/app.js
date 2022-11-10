@@ -228,13 +228,12 @@ emailInput.onkeyup = validateInputs;
 
 
 //PREVIENE QUE SE BORREN LOS DATOS YA INGRESADOS EN CASO DE ERROR O QUE SE ENTREGUE UN FORMULARIO VACIO.
-formSubmit.addEventListener("submit", (e) => {
-    e.preventDefault();
-    validateInputs();
+formSubmit.addEventListener("submit", (evento) => {
+    validateInputs(evento);
 })
 
 // VALIDA LOS INPUTS INGRESADOS
-function validateInputs() {
+function validateInputs(evento) {
 
     //CAPTURA EL VALOR INGRESADO EN LOS INPUTS Y CON EL METODO ' TRIM() ' REMUEVE ESPACIOS VACIOS ADELANTE Y AL FINAL.
     const nameValue = nameInput.value.trim();
@@ -244,6 +243,7 @@ function validateInputs() {
     //VALIANDO NOMBRE POR CAMPO VACIO, POR SI CONTIENE ALGUN CARACTER ESPECIAL USANDO UNA EXPRESION REGULAR O SI LA CANTIDAD DE CARACTERES ES MAYOR a 25.
     if (!nameValue || !(/^[a-zA-Z]+(?:[\s.]+[a-zA-Z]+)*$/).test(nameInput.value)) {
         valError(nameInput, "Valid name is required.");
+        evento.preventDefault();
     }
     else if (nameValue.length > 25) {
         valError(nameInput, "Name is too long.");
@@ -255,6 +255,7 @@ function validateInputs() {
     //VALIDANDO NUMERO DE TARJETA POR CAMPO VACIO, SI CANTIDAD DE CARACTERES ES MENOR A 16 O SI LO INGRESADO CONTIENE ALGUN CARACTER QUE NO SEA UN NUMERO.
     if (!creditCardValue || creditCardValue.length != 16 || isNaN(creditCardInput.value)) {
         valError(creditCardInput, "16-digit card number is required.");
+        evento.preventDefault();
     } else {
         valSuccess(creditCardInput);
     }
@@ -262,8 +263,10 @@ function validateInputs() {
     //VALIDANDO EMAIL POR CAMPO VACIO O COMPROBANDO POR VERDADERO O FALSO SI ES UN EMAIL VALIDO.
     if (!emailValue) {
         valError(emailInput, "Valid email is required.");
+        evento.preventDefault();
     } else if (!valEmail(emailValue)) {
         valError(emailInput, "Email is not a valid email.")
+        evento.preventDefault();
     }
     else {
         valSuccess(emailInput)
