@@ -242,7 +242,7 @@ function validateInputs() {
     const emailValue = emailInput.value.trim();
 
     //VALIANDO NOMBRE POR CAMPO VACIO, POR SI CONTIENE ALGUN CARACTER ESPECIAL USANDO UNA EXPRESION REGULAR O SI LA CANTIDAD DE CARACTERES ES MAYOR a 25.
-    if (!nameValue || !(/^[a-zA-Z]+$/).test(nameInput.value)) {
+    if (!nameValue || !(/^[a-zA-Z]+(?:[\s.]+[a-zA-Z]+)*$/).test(nameInput.value)) {
         valError(nameInput, "Valid name is required.");
     }
     else if (nameValue.length > 25) {
