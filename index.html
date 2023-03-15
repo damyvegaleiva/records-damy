@@ -1,124 +1,131 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="./css/style.css" />
+    <title>RECORDS | DAMY</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+  </head>
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-  <link rel="stylesheet" href="./css/style.css">
-  <title>RECORDS | DAMY </title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-</head>
+  <body>
+    <div class="py-2 text-center">
+      CONSULTAS Y PEDIDOS // recordsdamy@gmail.com
+    </div>
 
-<body>
-  <div class="py-2 text-center">
-    CONSULTAS Y PEDIDOS // recordsdamy@gmail.com
-  </div>
+    <header>
+      <!---------------------- START NAV ---------------------->
+      <nav class="navbar navbar-expand-md navbar-light fixed-top" id="navBar">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="index.html">
+            <img src="./images/logo-records.webp" alt="" />
+          </a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <!-- <form class="d-flex"> -->
+                <button class="btn btn-outline-dark" id="buttonCart">
+                  <i class="bi-cart-fill me-1 fa-solid fa-cart-shopping"></i>
+                  Cart
+                  <span
+                    class="badge bg-dark text-white ms-1 rounded-pill"
+                    id="itemCounterCart"
+                    >0</span
+                  >
+                </button>
+                <!-- </form> -->
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="#vinyl">Vinyl</a>
+              </li>
+              <li>
+                <div id="modal-container" class="modal-container dont-show">
+                  <h4>Tu carrito:</h4>
+                  <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th>ID:</th>
+                        <th>Item:</th>
+                        <th class="qty-th">Qty:</th>
+                        <th>Price:</th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <tbody class="table-body" id="table-body">
+                      <!-- CART TABLE -->
+                    </tbody>
+                  </table>
+                  <h4 id="total" class="mb-0 mt-5">Total a pagar: $</h4>
+                  <button
+                    id="purchaseButton"
+                    class="btn btn-bg__color mt-2 w-100"
+                  >
+                    PURCHASE
+                  </button>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <!---------------------- ENDS NAV ---------------------->
+      <div class="hero-banner">
+        <h1 class="hero-title">Welcome to records Damy</h1>
+      </div>
+    </header>
 
-  <header>
-    <!---------------------- START NAV ---------------------->
-    <nav class="navbar navbar-expand-md navbar-light fixed-top" id="navBar">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="index.html">
-          <img src="./images/logo-records.webp" alt="">
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <!-- <form class="d-flex"> -->
-              <button class="btn btn-outline-dark" id="buttonCart">
-                <i class="bi-cart-fill me-1 fa-solid fa-cart-shopping"></i>
-                Cart
-                <span class="badge bg-dark text-white ms-1 rounded-pill" id="itemCounterCart">0</span>
-              </button>
-              <!-- </form> -->
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="#vinyl">Vinyl</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Promociones</a>
-            </li>
-            <li>
-              <div id="modal-container" class="modal-container dont-show">
-                <h4>Tu carrito:</h4>
-                <table class="table table-striped">
-                  <thead>
-                    <tr>
-                      <th>ID:</th>
-                      <th>Item:</th>
-                      <th class="qty-th">Qty:</th>
-                      <th>Price:</th>
-                      <th></th>
-                    </tr>
-                  </thead>
-                  <tbody class="table-body" id="table-body">
-                    <!-- CART TABLE -->
-                  </tbody>
-                </table>
-                <h4 id="total" class="mb-0 mt-5">Total a pagar: $</h4>
-                <button id="purchaseButton" class="btn btn-bg__color mt-2 w-100">PURCHASE</button>
-              </div>
-            </li>
-          </ul>
+    <!---------------------- MAIN ---------------------->
+    <main id="vinyl">
+      <h1 class="text-center ns-shop">SHOP</h1>
+      <div class="container-fluid w-75 mx-auto contenedor__vinyls">
+        <form>
+          <input
+            class="mb-3 mx-auto search-bar"
+            id="searchInput"
+            type="text"
+            placeholder="Search..."
+          />
+        </form>
+        <div class="row render-vinyls" id="render-vinyls">
+          <!-- RECORDS GO HERE -->
         </div>
       </div>
-    </nav>
-    <!---------------------- ENDS NAV ---------------------->
-    <div class="hero-banner">
-      <h1 class="hero-title">Welcome to records Damy</h1>
-    </div>
-  </header>
+    </main>
 
-  <!---------------------- MAIN ---------------------->
-  <main id="vinyl">
-    <h1 class="text-center ns-shop">SHOP</h1>
-    <div class="container-fluid w-75 mx-auto contenedor__vinyls">
-      <form>
-        <input class="mb-3 mx-auto search-bar" id="searchInput" type="text" placeholder="Search...">
-      </form>
-      <div class="row render-vinyls" id="render-vinyls">
-        <!-- RECORDS GO HERE -->
-      </div>
-    </div>
+    <footer class="py-3 mt-3 text-center text-white text-uppercase">
+      -RECORDS DAMY-
+    </footer>
 
-    <div class="form-container">
-      <h2>PAYMENT FORM</h2>
-      <form id="form" class="form-purchase">
-        <div class="input-control">
-          <label for="name">Your Name:</label>
-          <input id="name" name="name" type="text" maxlength="30" placeholder="Your Name" />
-          <small class="error"></small>
-        </div>
-        <div class="input-control">
-          <label for="credit-card">Payment: <i class="fa-solid fa-credit-card"></i> <i class="fa-brands fa-cc-visa"></i>
-            <i class="fa-brands fa-cc-mastercard"></i> <i class="fa-brands fa-cc-discover"></i></label>
-          <input id="credit-card" name="credit-card" type="text" placeholder="16-digit card number" maxlength="18" />
-          <small class="error"></small>
-        </div>
-        <div class="input-control">
-          <label for="email">Email:</label>
-          <input id="email" name="email" type="email" placeholder="email@example.com" />
-          <small class="error"></small>
-        </div>
-        <button class="btn btn__submit" type="submit">Submit</button>
-      </form>
-    </div>
-  </main>
-
-  <footer class="py-3 mt-3 text-center text-white text-uppercase">-RECORDS DAMY-</footer>
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-    crossorigin="anonymous"></script>
-  <script src="https://kit.fontawesome.com/394293560f.js" crossorigin="anonymous"></script>
-  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <script src="./script/app.js"></script>
-</body>
-
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://kit.fontawesome.com/394293560f.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="./script/app.js"></script>
+  </body>
 </html>
