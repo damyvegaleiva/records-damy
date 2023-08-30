@@ -1,26 +1,26 @@
 .modal-container {
-    background: #e9eff0;
-    padding: 25px;
-    border: 10px solid #c39532;
-    border-radius: 0 0 5px 15px;
-    top: 1;
-    left: 0px;
-    position: absolute;
+  background: #e9eff0;
+  padding: 25px;
+  border: 10px solid #c39532;
+  border-radius: 0 0 5px 15px;
+  top: 1;
+  left: 0px;
+  position: absolute;
 }
 
 #navBar img {
-    width: 120px;
+  width: 120px;
 }
 
 #navBar ul li a {
-    font-family: "Roboto", sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
-.dont-show {
-    display: none;
+.hidden {
+  display: none;
 }
 
 .qty-th {
-    min-width: 70px;
-    margin: auto;
+  min-width: 70px;
+  margin: auto;
 }
